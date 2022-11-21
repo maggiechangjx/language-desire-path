@@ -1,0 +1,12 @@
+# ignore compiled output
+
+pub/bundle*
+pub/*.eot
+pub/*.woff
+pub/*.woff2
+pub/*.ttf
+
+# ignore modules
+
+node_modules
+package-lock.json
