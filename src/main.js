@@ -47,9 +47,30 @@ function loadWords() {
    let right_page_w = document.getElementById("page-right").offsetWidth;
    let right_page_h = window.innerHeight;
 
+   let articles = ['a','an','the','of','to','some'];
+
    // generate random words and scatter on page
    for (let i = 0; i < NUM_WORDS; i++) {
       let word = RiTa.randomWord();
+      WORDS_STR.push(word);
+
+      let elem = document.createElement("button");
+      elem.className = "gen-word";
+      elem.textContent = word;
+      elem.style.position = "absolute";
+      //elem.style.color = GENWORD_COLOUR;
+      elem.style.borderStyle = "solid";
+      //elem.style.borderColor = GENWORD_BORDER;
+      //elem.style.borderRadius = "3px";
+      //elem.style.backgroundColor = GENWORD_BG;
+      elem.style.padding = "5px";
+      elem.style.left = Math.round(randomNum(left_col_w+20, right_page_w)) + "px";
+      elem.style.top = Math.round(randomNum(20, right_page_h-70)) + "px";
+      document.getElementById('page-right').appendChild(elem);
+      WORDS_ELEM.push(elem);
+   }
+   for (let j = 0; j < articles.length; j++) {
+      let word = articles[j];
       WORDS_STR.push(word);
 
       let elem = document.createElement("button");
