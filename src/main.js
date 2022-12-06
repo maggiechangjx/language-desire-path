@@ -163,7 +163,7 @@ function initWordBase() {
       addInitWord(word,x_coord, y_coord); 
    }
 }
-//initWordBase() // ONLY NEED TO BE CALLED ONCE WHEN SETTING UP THE SITE
+// initWordBase() // ONLY NEED TO BE CALLED ONCE WHEN SETTING UP THE SITE
 
 
 function displayWords2() {
@@ -184,6 +184,7 @@ function displayWords(word, x, y) {
    let elem = document.createElement("button");
       elem.className = "gen-word";
       elem.textContent = word;
+      elem.setAttribute('id', word);
       elem.style.position = "absolute";
       elem.style.color = "red" //GENWORD_COLOUR;
       elem.style.borderStyle = "dotted";
@@ -236,9 +237,10 @@ function updateWordClick(elem, word) {
          let g = snapshot.val().green;
          let b = snapshot.val().blue;
          let a = snapshot.val().alpha;
-         let new_b = b <= 253 ? b + 2 : b;   // control within 255
+         let new_b = b <= 253 ? b + 5 : b;   // control within 255
          let new_color = "rgba(" + r + ", " + g + ", " + new_b + ", " + a + ")";
-         
+         let gradient = "radial-gradient(rgba(255,255,255,0) 30%, " + new_color + " 80%";
+
          prev_val = snapshot.val().click;
          new_val = prev_val + 1;
          update(ref(db, 'all_words/' + word), {click: new_val});
@@ -248,11 +250,14 @@ function updateWordClick(elem, word) {
          // change color intensity of the word based on number of clicks 
          // IT WOULD BE NICE IF THE COLORS OF ALL WORDS CAN CHANGE RELATIVE 
          // TO EACH CLICK BUT THAT MIGHT BE TOO MUCH WORK -- SAVE TILL THE END 
+
+         // KEEP THE GRADIENTS !!!
          update(ref(db, 'all_words/' + word), {blue: new_b});
          // elem.style.color = new_color;
          elem.style.borderColor = new_color;
-         elem.style.backgroundColor = new_color;
+         elem.style.backgroundImage = gradient;
          console.log(new_color);
+         console.log(gradient)
       } 
       else {
          console.log("no data available");
@@ -262,6 +267,7 @@ function updateWordClick(elem, word) {
    });
 }
 
+let gradient = "radial-gradient(rgba(255,255,255,0) 30%, rgba(255, 140, 100, .15) 80%";
 
 // updateWordClick('abstract');
 
@@ -324,7 +330,18 @@ function mouseInteractions() {
 // updateWordClick('an');
 
 
+/*
+let r = snapshot.val().red;
+         let g = snapshot.val().green;
+         let b = snapshot.val().blue;
+         let a = snapshot.val().alpha;
+         let new_b = b <= 253 ? b + 5 : b;   // control within 255
+         let new_color = "rgba(" + r + ", " + g + ", " + new_b + ", " + a + ")";
+         let gradient = "radial-gradient(rgba(255,255,255,0) 30%, " + new_color + " 80%";
 
+         elem.style.borderColor = new_color;
+         elem.style.backgroundImage = gradient;
+*/
 
 function updateWords() {
    onValue(ALL_WORDS_REF, (snapshot) => {
@@ -335,9 +352,20 @@ function updateWords() {
          let word = child.val().word;
          let x = child.val().x;
          let y = child.val().y;
+         let r = snapshot.val().red;
+         let g = snapshot.val().green;
+         let b = snapshot.val().blue;
+         let a = snapshot.val().alpha;
+         let color = "rgba(" + r + ", " + g + ", " + b + ", " + a + ")";
+         let gradient = "radial-gradient(rgba(255,255,255,0) 30%, " + color + " 80%";
          displayWords(word, x, y);
          WORDS_STR.push(word);
          //console.log(WORDS_STR);
+
+         // update color on all pages with the same link
+         let elem = document.getElementById(word)
+         elem.style.borderColor = color;
+         elem.style.backgroundImage = gradient;
       });
       //console.log(WORDS_STR);
       //console.log(WORDS_ELEM[0]);

@@ -1,8 +1,5 @@
-# Base Node Repo
 
 **Note: these notes assume you're on a unix-like OS, like macOS or Ubuntu**
-
-This repo is an archive of a pared-down version of Nic's browser-based prototyping environment. It might be a useful reference to you if you want a node/npm to browser workflow. You're not obligated to use it for anything, but it's here if you want it.
 
 ## Organization
 
