@@ -7,7 +7,8 @@ body {
 
 #container {
   display: grid;
-  grid-template-columns: 20% 80%;
+  width: 100%;
+  grid-template-columns: 0% 20% 60% 20% 0%;
 }
 
 .mouse-trail { /* className for the trail elements */
@@ -21,10 +22,12 @@ body {
 #page-left {
   background-color: rgb(40, 40, 38);
   grid-column-start: 1;
-  grid-column-end: 2;
-  /*grid-row-end: 2;*/
+  grid-column-end: 3;
+  grid-row-end: 2;
+  /*resize:horizontal;*/
   overflow: auto;
   height: 100vh;
+  /*flex-shrink: .57*/;
 }
 
 #collective-sentence {
@@ -40,18 +43,21 @@ body {
 }
 
 #page-right {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  /*grid-row-end: 2;*/
+  grid-column-start: 3;
+  grid-column-end: 6;
+  grid-row-end: 2;
   height: 100vh;
   width: 100%;
+  position: relative;
+  /*display: flex;*/
 }
 
-.gen-word {
-  color: rgb(255, 70, 90);
-  border-color: rgb(255, 140, 100);
-  background-color: rgba(191, 255, 190, 0.9);
-}
+
+/* .gen-word { */
+  /*color: rgb(255, 70, 90);*/
+  /* border-color: rgb(255, 140, 100); */
+  /* background-color: rgba(191, 255, 190, 0.9); */
+/*} */
 
 button {
   cursor: pointer;

@@ -13,5 +13,8 @@
     "chokidar": "^3.5.1",
     "esbuild": "^0.12.5",
     "live-server": "^1.2.1"
+  },
+  "dependencies": {
+    "firebase": "^9.14.0"
   }
 }
