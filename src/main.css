@@ -5,6 +5,13 @@ body {
   width: 100vw;
 }
 
+p {
+  font-family: "Lora";
+  font-size: 15px;
+  font-weight: 400;
+  font-style: normal;
+}
+
 #container {
   display: grid;
   width: 100%;
@@ -36,6 +43,10 @@ body {
   flex-direction: row;
   grid-row-start:1;
   grid-row-end:2;
+  font-family: "Lora";
+  font-size: 15px;
+  font-weight: 700;
+  font-style: normal;
 }
 
 #mode-select > div {
@@ -60,6 +71,10 @@ body {
   height: 15vh;
   overflow-y: auto;
   /*resize:vertical;*/
+  font-family: "Lora";
+  font-size: 15px;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #collective-sentence {
@@ -97,6 +112,10 @@ body {
   margin: 0px 0px 0px 0px;
   padding: 0px 10px 0px 10px;
   overflow-y: auto;
+  font-family: "Lora";
+  font-size: 22px;
+  font-weight: 700;
+  font-style: normal;
 }
 
 .logged-sentence {
