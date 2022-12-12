@@ -9,6 +9,7 @@ body {
   display: grid;
   width: 100%;
   grid-template-columns: 0% 20% 60% 20% 0%;
+  grid-template-rows: 4% 14% 75% 7%;
 }
 
 .mouse-trail { /* className for the trail elements */
@@ -20,27 +21,90 @@ body {
 }
 
 #page-left {
-  background-color: rgb(40, 40, 38);
+  background-color: rgb(61, 61, 57);
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-end: 2;
   /*resize:horizontal;*/
-  overflow: auto;
-  height: 100vh;
+  /*overflow: auto;*/
+  height: 90vh;
   /*flex-shrink: .57*/;
 }
 
+#mode-select {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  grid-row-start:1;
+  grid-row-end:2;
+}
+
+#mode-select > div {
+  border: 1px solid white;
+  background: rgb(145, 171, 255);
+  padding: 5px;
+  cursor: pointer;
+  flex: 1;
+}
+
+#instructions {
+  padding: 0px 10px 0px 10px;
+  font-size: 17px;
+  color:rgb(145, 171, 255);
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-left-width: 0px;
+  border-bottom-color:rgb(161, 164, 153);
+  border-style: solid;
+  grid-row-start: 2;
+  grid-row-end: 3; 
+  height: 15vh;
+  overflow-y: auto;
+  /*resize:vertical;*/
+}
+
 #collective-sentence {
+  margin: 0px;
   padding: 0px 10px 0px 10px;
   font-size: 28px;
   color:rgb(161, 164, 153);
 }
 
-#forming-sentence {
+#sentences {
+  background-color: rgb(40, 40, 38);
   padding: 0px 10px 0px 10px;
-  font-size: 28px;
-  color:rgb(219, 255, 126);
+  grid-row-start: 3;
+  grid-row-end: 4;
+  height: 73vh;
+  overflow-y: auto;
+  color: rgb(195, 197, 191);
+  font-size: 17px;
 }
+
+#forming-sentence {
+  font-size: 24px;
+  /*color:rgb(219, 255, 126);*/
+  padding-left: 10px;
+  padding-right: 10px;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  border-bottom-width: 0px;
+  border-right-width: 0px;
+  border-left-width: 0px;
+  border-top-color: rgb(161, 164, 153);
+  border-style: solid;
+  height: 10vh;
+  background-color: rgb(77, 77, 77);
+  margin: 0px 0px 0px 0px;
+  padding: 0px 10px 0px 10px;
+  overflow-y: auto;
+}
+
+.logged-sentence {
+  cursor: pointer;
+}
+
+
+
 
 #page-right {
   grid-column-start: 3;
