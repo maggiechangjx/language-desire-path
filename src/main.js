@@ -526,7 +526,7 @@ function pageLeftRightInteractions(word_elem, post_id) {
       MOUSE_POS_PRE.x = window.event.clientX; 
       MOUSE_POS_PRE.y = window.event.clientY; 
 
-      console.log(SEL_WORDS[SEL_WORDS.length - 1].textContent);
+      //console.log(SEL_WORDS[SEL_WORDS.length - 1].textContent);
 
       // store the selected words in firebase when 5 words are selected
       if (SEL_WORDS.length >= 5) {
