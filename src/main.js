@@ -1265,7 +1265,7 @@ function removeWordPeriodic() {
       let size = snapshot.size; 
       console.log('all_words length: ' + size);
       
-      if (size > 73) {
+      if (size > 85) {
          let log = {};
          let smallest_word;
          let least_click;
