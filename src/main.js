@@ -164,8 +164,9 @@ function addInitWord(word, x, y) {
 
 let right_page_w = document.getElementById("page-right").offsetWidth;
 let right_page_h = window.innerHeight;
-let w_offset = 120;
-let h_offset = 30;
+let w_offset = 110;// inital val 120;
+let h_top = 10; // initial val 30;
+let h_offset = 95;// initial val 30;
 
 
 function initWordBase() {
@@ -173,20 +174,33 @@ function initWordBase() {
    // ONLY NEED TO BE CALLED ONCE WHEN SETTING UP THE SITE
    // temporarily comment out removeWord() --> singular, and 
    // updateNewWords() when calling this function
+
+   // to init a new word base, first delete the existing data on firebase and
+   // then call on this function once
+   // the location of the words will map to the size of the interface
    let left_col_w = document.getElementById("page-left").offsetWidth;
 
    let articles = [
       'a','an', 'and', 'as', 'do', 'some', 'that', 'the', 'then', 'there', 
-      'but', 'by', 'when','what','to', 'of', ',', ':', '?', '(',
-      ')', '*', '-', "'",'on','you'
+      'but', 'by', 'when','what','to', 'of', ',', ':', '?', "'",'on','you', 
+      'your', 'her','she','his','him','he', 'to', 'is', 'can',
+      'they','them','their','my','mine', 'in', 'behold'
    ];
 
-   let words = [
+   let words_prev = [
       'egg','beauty','bed','beneath','bitter','above','blow','blue','her','him',
-      'they','cyborg', 'egg','head','hair','feet','fluff','ironic','iconic','from',
+      'they','cyborg','head','hair','feet','fluff','ironic','iconic','from',
       'frantic','behold','how','hot','have','micro','myth','cryptic','we', 'water',
       'machinic','desire','feral','no','chill','not','rock','plant','image','seeing',
       'worship','wind','web','fluff','time','show','bling','suck','through','sea'
+   ];
+
+   let words = [
+      'there is no satisfaction without', 'grit', 'drip', 'binge', '-ism', 'gas',
+      '1,000,000', 'micro myth', 'hot', 'work', 'gate', 'web', 'link', 'one can witness',
+      'desire', 'water', 'general artificial', 'machinic subconscious', 'cyborg', 
+      'intelligence', 'world', 'how big is your', 'fakes', "creates", "sees",
+      'grows', 'spring', 'on becoming', 'peels', 'breathes', 'perform', 'but what if'
    ];
 
    // generate random words and put in firebase 
@@ -205,8 +219,8 @@ function initWordBase() {
       let word = words[i];
       // WORDS_STR.push(word);  // IS THIS NECESSARY???
 
-      let x_coord = Math.round(randomNum(0, right_page_w - w_offset));
-      let y_coord = Math.round(randomNum(h_offset, right_page_h - h_offset))
+      let x_coord = Math.round(randomNum(10, right_page_w - w_offset));
+      let y_coord = Math.round(randomNum(h_top, right_page_h - h_offset))
       // elem.style.left = x_coord + "px";
       // elem.style.top = y_coord + "px";
       addInitWord(word,x_coord, y_coord);       
@@ -217,13 +231,13 @@ function initWordBase() {
       // WORDS_STR.push(word);  // IS THIS NECESSARY???
 
       let x_coord = Math.round(randomNum(0, right_page_w - w_offset));
-      let y_coord = Math.round(randomNum(h_offset, right_page_h - h_offset))
+      let y_coord = Math.round(randomNum(h_top, right_page_h - h_offset))
       // elem.style.left = x_coord + "px";
       // elem.style.top = y_coord + "px";
       addInitWord(word,x_coord, y_coord); 
    }
 }
-// initWordBase() // ONLY NEED TO BE CALLED ONCE WHEN SETTING UP THE SITE
+//initWordBase() // ONLY NEED TO BE CALLED ONCE WHEN SETTING UP THE SITE
 
 
 function displayWords(word, x, y) {
@@ -333,7 +347,7 @@ function storeLine(word1, word2, x1, y1, ctrl1x, ctrl1y, ctrl2x, ctrl2y, x2, y2)
 
 // WHY IS X_OFFSET NEEDED QAQ
 // corrects the strange gap between canvas and generated words
-let x_offset = 335;
+let x_offset = 250;//og val 335;
 function getPathCoords(cur_pos, pre_pos) {
    // returns the values of the coordinates that form the bezier curve
    // when a word is clicked and store it in firebase
@@ -924,15 +938,15 @@ function pageLeftInteractions() {
          console.log('sentence id: ' + post_key)
          console.log(prompt_box);
 
-         let input1 = prompt('Write a new word following the sentence you selected:');
-         while (input1 == '') {input1 = prompt('You *have* to write a new word following the selected sentence:');}
-         let input2 = prompt('Write another new word following the sentence you selected:');
-         while (input2 == '') {input2 = prompt('You *have* to write a new word following the selected sentence:');}
+         let input1 = prompt('Write a new word or phrase following the sentence you selected:');
+         while (input1 == '') {input1 = prompt('You *have* to write a new word or phrase following the selected sentence:');}
+         let input2 = prompt('Write another new word or phrase following the sentence you selected:');
+         while (input2 == '') {input2 = prompt('You *have* to write a new word or phrase following the selected sentence:');}
 
          if (input1 != null && input2 != null) {
             console.log('inputs: ' + input1 + ' ' + input2);
             prompt_box.style.color = PL_PROMPT;
-            prompt_box.innerText = 'The words you inputted are ' + '"' + input1 + '"' + ' and ' + '"' + input2 + '"';
+            prompt_box.innerText = 'You wrote ' + '"' + input1 + '"' + ' and ' + '"' + input2 + '"';
             setTimeout(function() {
                document.getElementById('forming-sentence').innerText = '';
                document.getElementById('forming-sentence').style.color = 'rgb(219, 255, 126)';
@@ -1074,7 +1088,7 @@ function selectMode() {
       edit.style.color = INACTIVE_DIV_TEXT;
       edit.style.borderColor = INACTIVE_DIV_TEXT;
       
-      instructions.innerText = "✽ Click on any of the red boxes to link 5 words together\n✽ The words you've linked will appear on the left panel\n✽ If you see any gray boxes appear, refresh the page and they will then be selectable";
+      instructions.innerText = "✽ Click on any of the red boxes to link 5 words and phrases together\n✽ The words you've linked will appear on the left panel\n✽ If you see any gray boxes appear, refresh the page and they will then be selectable";
       instructions.style.padding = '10px';
       
       info_box.style.color = PL_PROMPT;
@@ -1096,7 +1110,7 @@ function selectMode() {
       write.style.color = INACTIVE_DIV_TEXT;
       write.style.borderColor = INACTIVE_DIV_TEXT;
 
-      instructions.innerText = "✽ Click on any of the sentences on the left panel to add 2 additional words to the end of it\n✽ The words you add will also be added to the space on the right and can be used to write future sentences\n✽ Refresh sometimes to see what others wrote";
+      instructions.innerText = "✽ Click on any of the sentences on the left panel to add 2 additional words or phrases to the end of it\n✽ The words you add will also be added to the space on the right and can be used to write future sentences\n✽ Refresh sometimes to see what others wrote";
       instructions.style.padding = '10px';
       
       info_box.style.color = PL_PROMPT;
